@@ -1,28 +1,19 @@
-def h_index(papers: int, citations_quantities: map):
-    h = 0
-    y = ""
+def h_index(citations):
+    citations.sort()
 
-    citations = [0] * (papers + 1)
+    papers = len(citations)
 
-    new_citations = 0
+    for index, cited in enumerate(citations):
+        result = papers - index
 
-    for citation_times in citations_quantities:
+        if result <= cited:
+            return result
 
-        if citation_times > h:
-            try:
-                citations[citation_times] += 1
-            except IndexError:
-                citations[papers] += 1
+    return 0
 
-            if new_citations == citations[h]:
-                h += 1
-                new_citations = 0
-            else:
-                new_citations += 1
 
-        y += f" {h}"
-
-    return y
+def h_index_per_paper(papers: int, citations):
+    return [h_index(citations[:paper]) for paper in range(1, papers + 1)]
 
 
 def main():
@@ -30,9 +21,9 @@ def main():
 
     for case in range(1, cases + 1):
         papers = int(input())
-        citations = map(int, input().split())
+        citations = list(map(int, input().split()))
 
-        print(f"Case #{case}: {h_index(papers, citations)}")
+        print(f"Case #{case}: {h_index_per_paper(papers, citations)}")
 
 
 if __name__ == "__main__":
