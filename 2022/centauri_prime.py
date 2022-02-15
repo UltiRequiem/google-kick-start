@@ -4,10 +4,7 @@ def ruler(kingdom: str):
     if "y" == last_letter:
         return "nobody"
 
-    if last_letter in "aeiou":
-        return "Alice"
-
-    return "Bob"
+    return "Alice" if last_letter in "aeiou" else "Bob"
 
 
 def main():

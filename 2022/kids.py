@@ -2,7 +2,7 @@ def main():
     cases = int(input())
 
     for case in range(1, cases + 1):
-        (_, num_kids) = map(int, input().split())
+        _, num_kids = map(int, input().split())
 
         candies_quantity = map(int, input().split())
 

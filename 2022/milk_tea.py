@@ -30,17 +30,13 @@ def generate_new_optimal(optimal: str, change_set: set):
 
 
 def main():
-    t = int(input())
-    for t in range(t):
+    cases = int(input())
+
+    for case in range(cases):
         n, m, p = map(int, input().split())
-        friends = []
-        for i in range(n):
-            s = input()
-            friends.append(list(map(int, s)))
-        forbidden = set()
-        for i in range(m):
-            s = input()
-            forbidden.add(s)
+
+        friends = [list(map(int, input())) for _ in range(n)]
+        forbidden = {input() for _ in range(m)}
 
         optimal = ""
         distance = []
@@ -74,7 +70,7 @@ def main():
 
             min_complicates = optimal_distance + add_distance
 
-        print(f"Case #{t+1}: {min_complicates}")
+        print(f"Case #{case+1}: {min_complicates}")
 
 
 if __name__ == "__main__":

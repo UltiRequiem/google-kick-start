@@ -1,20 +1,19 @@
-VALID_INPUTS = ["B", "R", "."]
-
-
 def process(dashboard_data: list, size: int):
     if any(len(row) != size for row in dashboard_data):
         return "Impossible"
 
     flatten = [char for row in dashboard_data for char in row]
 
-    values = set(flatten)
-
-    b_apparitions, r_apparitions = flatten.count("B"), flatten.count("R")
+    b_apparitions, r_apparitions, dot_apparitions = (
+        flatten.count("B"),
+        flatten.count("R"),
+        flatten.count("."),
+    )
 
     if b_apparitions - 1 > r_apparitions or r_apparitions - 1 > b_apparitions:
         return "Impossible"
 
-    if any(char not in VALID_INPUTS for char in values):
+    if any(char not in "BR." for char in set(flatten)):
         return "Impossible"
 
     blue_wins = []
