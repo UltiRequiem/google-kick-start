@@ -1,10 +1,5 @@
 def h_index(papers: int, citations_quantities: map):
-    h = 0
-    y = ""
-
-    citations = [0] * (papers + 1)
-
-    new_citations = 0
+    new_citations, h, citations, h_index_over_time = 0, 0, [0] * (papers + 1), ""
 
     for citation_times in citations_quantities:
 
@@ -20,9 +15,9 @@ def h_index(papers: int, citations_quantities: map):
             else:
                 new_citations += 1
 
-        y += f" {h}"
+        h_index_over_time += f" {h}"
 
-    return y
+    return h_index_over_time
 
 
 def main():
@@ -32,7 +27,7 @@ def main():
         papers = int(input())
         citations = map(int, input().split())
 
-        print(f"Case #{case}: {h_index(papers, citations)}")
+        print(f"Case #{case}:{h_index(papers, citations)}")
 
 
 if __name__ == "__main__":
