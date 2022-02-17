@@ -17,18 +17,17 @@ def process(data: list[list[str]], size: int):
     if size > 1:
         if b_apparitions + dot_apparitions < r_apparitions:
             return "Impossible"
-    
+
         if r_apparitions + dot_apparitions < b_apparitions:
             return "Impossible"
-    
+
     blue_wins = []
     red_wins = []
 
-    for row in data:
-        blue_wins.append(all(char == "B" for char in row))
-        red_wins.append(all(char == "R" for char in row))
-
     for column in range(len(data)):
+        blue_wins.append(all(char == "B" for char in data[column]))
+        red_wins.append(all(char == "R" for char in data[column]))
+
         column_data = [row[column] for row in data]
 
         blue_wins.append(all(char == "B" for char in column_data))
