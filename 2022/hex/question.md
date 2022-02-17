@@ -1,4 +1,7 @@
-> "The game ends immediately when one player wins" and " Note that the four corners are considered connected to both colors."
+Taking in count
+
+> "The game ends immediately when one player wins" and "Note that the four
+> corners are considered connected to both colors."
 
 Then how Case 5 can be possible?
 
