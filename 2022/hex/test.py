@@ -41,7 +41,7 @@ Case #7: Blue wins""",
 ]
 
 
-for index, test in enumerate(tests):
+for index, test in enumerate(tests, start=1):
     result = subprocess.getoutput(f"echo '{test['input']}' | python challenge.py ")
 
     if result == test["output"]:
