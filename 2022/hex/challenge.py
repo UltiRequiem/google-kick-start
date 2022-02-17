@@ -1,7 +1,22 @@
 VALID_INPUTS = ["B", "R", "."]
 
 
+# def make_table(data, size: int):
+#     table = [None] * size
+
+#     for row in range(size):
+#         table[row] = data[row]
+
+#     for row in table:
+#         print(row)
+
+#     return table
+
+
 def process(data: list[list[str]], size: int):
+
+    # make_table(data, size)
+
     if any(len(data) != size for data in data):
         return "Impossible"
 
@@ -23,18 +38,18 @@ def process(data: list[list[str]], size: int):
     blue_wins = []
     red_wins = []
 
-    for column in range(len(data)):
-        blue_wins.append(all(char == "B" for char in data[column]))
-        red_wins.append(all(char == "R" for char in data[column]))
+    for index, value in enumerate(data):
+        blue_wins.append(all(char == "B" for char in value))
+        red_wins.append(all(char == "R" for char in value))
 
-        column_data = [row[column] for row in data]
+        column_data = [row[index] for row in data]
 
         blue_wins.append(all(char == "B" for char in column_data))
         red_wins.append(all(char == "R" for char in column_data))
 
     b_wins_count, r_wins_count = sum(blue_wins), sum(red_wins)
 
-    if size > 2 and (b_wins_count > 1 or r_wins_count > 1):
+    if size >= 2 and (b_wins_count >= 1 and r_wins_count >= 1):
         return "Impossible"
 
     if b_wins_count or r_wins_count:
