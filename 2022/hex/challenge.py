@@ -25,17 +25,20 @@ def process(data: list[list[str]], size: int):
     red_wins = []
 
     for index, value in enumerate(data):
-        blue_wins.append(all(char == "B" for char in value))
-        red_wins.append(all(char == "R" for char in value))
 
         column_data = (row[index] for row in data)
 
-        blue_wins.append(all(char == "B" for char in column_data))
+        blue_wins.append(all(char == "B" for char in value))
+
         red_wins.append(all(char == "R" for char in column_data))
 
-    b_wins_count, r_wins_count = sum(blue_wins), sum(red_wins)
 
-    if size >= 2 and (b_wins_count >= 1 and r_wins_count >= 1):
+
+    b_wins_count, r_wins_count = sum(blue_wins), sum(red_wins)
+    
+
+
+    if size > 1 and (b_wins_count > 1 and r_wins_count > 1):
         return "Impossible"
 
     if b_wins_count or r_wins_count:
