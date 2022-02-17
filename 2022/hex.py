@@ -14,12 +14,11 @@ def process(data: list[list[str]], size: int):
         flatten.count(char) for char in VALID_INPUTS
     ]
 
-    if size > 1:
-        if b_apparitions + dot_apparitions < r_apparitions:
-            return "Impossible"
-
-        if r_apparitions + dot_apparitions < b_apparitions:
-            return "Impossible"
+    if size > 1 and (
+        (b_apparitions + dot_apparitions < r_apparitions)
+        or (r_apparitions + dot_apparitions < b_apparitions)
+    ):
+        return "Impossible"
 
     blue_wins = []
     red_wins = []
@@ -33,14 +32,13 @@ def process(data: list[list[str]], size: int):
         blue_wins.append(all(char == "B" for char in column_data))
         red_wins.append(all(char == "R" for char in column_data))
 
-    if size > 2 and (sum(blue_wins) > 1 or sum(red_wins) > 1):
+    b_wins_count, r_wins_count = sum(blue_wins), sum(red_wins)
+
+    if size > 2 and (b_wins_count > 1 or r_wins_count > 1):
         return "Impossible"
 
-    if sum(blue_wins):
-        return "Blue wins"
-
-    if sum(red_wins):
-        return "Red wins"
+    if b_wins_count or r_wins_count:
+        return "Blue wins" if b_wins_count else "Red wins"
 
     return "Nobody wins"
 
