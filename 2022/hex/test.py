@@ -45,7 +45,7 @@ for index, test in enumerate(tests, start=1):
     result = subprocess.getoutput(f"echo '{test['input']}' | python challenge.py ")
 
     if result == test["output"]:
-        colorized_print("[OK]")
+        colorized_print(f"[OK {index}]")
         exit()
 
     colorized_print(f"\n[FAIL: TEST {index}]", RED)

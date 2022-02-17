@@ -34,7 +34,7 @@ def process(data: list[list[str]], size: int):
 
     b_wins_count, r_wins_count = sum(blue_wins), sum(red_wins)
 
-    if size > 1 and (b_wins_count > 1 and r_wins_count > 1):
+    if size > 1 and (b_wins_count > 1 or r_wins_count > 1):
         return "Impossible"
 
     if b_wins_count or r_wins_count:
