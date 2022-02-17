@@ -1,23 +1,33 @@
+import numpy
+from numpy.typing import NDArray
+
 VALID_INPUTS = ["B", "R", "."]
+R_DIRECTION = "VERTICAL"
+B_DIRECTION = "HORIZONTAL"
 
 
-def process(data: list[list[str]], size: int):
+def find_path(path: tuple, data: NDArray, tail=[]):
+    pass
 
-    if any(len(data) != size for data in data):
-        return "Impossible"
 
-    flatten = [char for row in data for char in row]
+def process(data: NDArray, size: int):
 
-    if any(char not in VALID_INPUTS for char in set(flatten)):
-        return "Impossible"
+    parse_data = numpy.array(data)
 
-    b_apparitions, r_apparitions, dot_apparitions = [
-        flatten.count(char) for char in VALID_INPUTS
-    ]
+    flatten = [char for row in parse_data for char in row]
 
-    if size > 1 and (
-        (b_apparitions + dot_apparitions < r_apparitions)
-        or (r_apparitions + dot_apparitions < b_apparitions)
+    b_apparitions, r_apparitions, _ = [flatten.count(char) for char in VALID_INPUTS]
+
+    if (
+        (any(len(data) != size for data in parse_data))
+        or (any(char not in VALID_INPUTS for char in set(flatten)))
+        or (
+            size > 1
+            and (
+                (b_apparitions - 1 > r_apparitions)
+                or (r_apparitions - 1 > b_apparitions)
+            )
+        )
     ):
         return "Impossible"
 
@@ -25,12 +35,8 @@ def process(data: list[list[str]], size: int):
     red_wins = []
 
     for index, value in enumerate(data):
-
-        column_data = (row[index] for row in data)
-
         blue_wins.append(all(char == "B" for char in value))
-
-        red_wins.append(all(char == "R" for char in column_data))
+        red_wins.append(all(char == "R" for char in data.T[index]))
 
     b_wins_count, r_wins_count = sum(blue_wins), sum(red_wins)
 
@@ -48,7 +54,7 @@ def main():
 
     for case in range(1, cases + 1):
         size = int(input())
-        data = [list(input()) for _ in range(size)]
+        data = numpy.array([numpy.array(list(input())) for _ in range(size)])
 
         result = process(data, size)
 
